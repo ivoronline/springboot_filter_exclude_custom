@@ -22,6 +22,7 @@ public class MyFilter2 extends OncePerRequestFilter {
     System.out.println("FILTER2: Request");
     chain.doFilter(request, response);
     System.out.println("FILTER2: Response");
+
   }
 
 }

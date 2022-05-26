@@ -19,19 +19,18 @@ public class MyFilter1 extends OncePerRequestFilter {
   @Override
   public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
     throws IOException, ServletException {
+
+    //EXCLUDE ENDPOINTS
+    String path = request.getRequestURI();
+    if ("/NotFiltered".equals(path)) {
+    	chain.doFilter(request, response);
+    	return;
+    }
+
+    //FILTER CODE
     System.out.println("FILTER1: Request");
     chain.doFilter(request, response);
     System.out.println("FILTER1: Response");
-  }
-
-  //===================================================================
-  // SHOULD NOT FILTER
-  //===================================================================
-  @Override
-  protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-    String path = request.getRequestURI();
-    System.out.println(path);
-    return "/NotFiltered".equals(path);
   }
 
 }
